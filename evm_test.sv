@@ -8,7 +8,7 @@ class evm_test extends uvm_test;
     super.new(name, parent);
   endfunction
 
-  funtion void build_phase(uvm_phase phase);
+  function void build_phase(uvm_phase phase);
     super.build_phase(phase);
     env = evm_env::type_id::create("env", this);
   endfunction
@@ -32,7 +32,7 @@ class evm_test extends uvm_test;
                         `uvm_info(get_type_name(), "----           TEST PASS           ----", UVM_NONE)
                         `uvm_info(get_type_name(), "---------------------------------------", UVM_NONE)
                 end
-    `uvm_info("APB_TEST","Inside apb_test REPORT_PHASE",UVM_HIGH)
+    `uvm_info("EVM_TEST","Inside EVM_test REPORT_PHASE",UVM_HIGH)
   endfunction
 endclass
 

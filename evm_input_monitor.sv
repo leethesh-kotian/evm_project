@@ -22,15 +22,15 @@ class evm_input_monitor extends uvm_monitor;
     ip_mon_seq = evm_seq_item::type_id::create("ip_mon_seq");
 
    forever begin
-     @(evm_if.mon_cb);
-      ip_mon_seq.switch_on_evm <= evm_if.switch_on_evm;
-      ip_mon_seq.candidate_ready <= evm_if.candidate_ready;
-      ip_mon_seq.vote_candidate_1 <= evm_if.vote_candidate_1;
-      ip_mon_seq.vote_candidate_2 <= evm_if.vote_candidate_2;
-      ip_mon_seq.vote_candidate_3 <= evm_if.vote_candidate_3;
-      ip_mon_seq.voting_session_done <= evm_if.voting_session_done;
-      ip_mon_seq.display_results <= evm_if.display_results;
-      ip_mon_seq.display_winner <= evm_if.display_winner;
+     @(posedge evm_if.mon_cb);
+      ip_mon_seq.switch_on_evm = evm_if.switch_on_evm;
+      ip_mon_seq.candidate_ready = evm_if.candidate_ready;
+      ip_mon_seq.vote_candidate_1 = evm_if.vote_candidate_1;
+      ip_mon_seq.vote_candidate_2 = evm_if.vote_candidate_2;
+      ip_mon_seq.vote_candidate_3 = evm_if.vote_candidate_3;
+      ip_mon_seq.voting_session_done = evm_if.voting_session_done;
+      ip_mon_seq.display_results = evm_if.display_results;
+      ip_mon_seq.display_winner = evm_if.display_winner;
       $display("driving",$time);
       ip_mon_seq.print();
       ip_mon_port.write(ip_mon_seq);

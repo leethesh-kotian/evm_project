@@ -25,7 +25,7 @@ class evm_output_monitor extends uvm_monitor;
     @(evm_if.mon_cb);
      
     op_mon_seq.candidate_name = evm_if.candidate_name;
-    op_mon_seq.invaild_results = evm_if.invaild_results;
+    op_mon_seq.invalid_results = evm_if.invalid_results; 
     op_mon_seq.results = evm_if.results;
     op_mon_seq.voting_done = evm_if.voting_done;
     op_mon_seq.voting_in_progress = evm_if.voting_in_progress;

@@ -1,3 +1,4 @@
+/*
 class evm_sequence extends uvm_sequence #(evm_seq_item);
 
   `uvm_object_utils(evm_sequence)
@@ -7,7 +8,9 @@ class evm_sequence extends uvm_sequence #(evm_seq_item);
   endfunction
 
   virtual task body();
-    req = evm_seq_item::type_id::create("req");
+  evm_seq_item req; 
+   req = evm_seq_item::type_id::create("req");
+
     wait_for_grant();
     req.randomize();
     send_request(req);
@@ -24,6 +27,8 @@ class evm_main_sequence extends uvm_sequence #(evm_seq_item);
   endfunction
 
   virtual task body();
+   evm_seq_item req;
+   int i ;
     req = evm_seq_item::type_id::create("req");
 
     // EVM ON
@@ -76,7 +81,7 @@ class evm_main_sequence extends uvm_sequence #(evm_seq_item);
 
     // Display all result combinations
     int results_arr[4] = '{3,1,2,0};
-    for (int i = 0; i < 4; i++) begin
+    for (i = 0; i < 4; i++) begin
       wait_for_grant();
       void'(req.randomize() with {
         switch_on_evm == 1;
@@ -103,8 +108,57 @@ class evm_main_sequence extends uvm_sequence #(evm_seq_item);
 
   endtask
 endclass
+*/
+class evm_sequence extends uvm_sequence #(evm_seq_item);
+    `uvm_object_utils(evm_sequence)
 
+    function new(string name = "evm_sequence");
+        super.new(name);
+    endfunction
 
+    virtual task body();
+        // DECLARE VARIABLE AT TOP
+        evm_seq_item req;
+        
+        req = evm_seq_item::type_id::create("req");
+        wait_for_grant();
+        req.randomize();
+        send_request(req);
+        wait_for_item_done();
+    endtask
+endclass
 
+class evm_main_sequence extends uvm_sequence #(evm_seq_item);
+    `uvm_object_utils(evm_main_sequence)
+
+    function new(string name = "evm_main_sequence");
+        super.new(name);
+    endfunction
+
+    virtual task body();
+        `uvm_info("MAIN_SEQ", "Starting EVM main sequence", UVM_MEDIUM)
+        
+        // Simple test sequence
+        `uvm_do_with(req, {switch_on_evm == 1; voting_session_done == 0;})
+        
+        // Add a few votes
+        repeat(5) begin
+            `uvm_do_with(req, {
+                switch_on_evm == 1;
+                candidate_ready == 1;
+                vote_candidate_1 dist {0 :/ 7, 1 :/ 3};
+                vote_candidate_2 dist {0 :/ 7, 1 :/ 3};
+                vote_candidate_3 dist {0 :/ 7, 1 :/ 3};
+            })
+        end
+        
+        // End voting
+        `uvm_do_with(req, {
+            switch_on_evm == 1;
+            voting_session_done == 1;
+            display_winner == 1;
+        })
+    endtask
+endclass
 
 

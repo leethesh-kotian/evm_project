@@ -1,7 +1,7 @@
-
 import uvm_pkg::*;
+// import evm_pkg::*;
 `include "uvm_macros.svh"
- `include "define.svh"
+`include "evm_define.svh"
 //`include "design.v"
 `include "evm_package.sv"
 module evm_top;
@@ -44,7 +44,7 @@ module evm_top;
   end
 
   initial begin
-    run_test("evm_main_test");
+    run_test("evm_test");
   end
 
 

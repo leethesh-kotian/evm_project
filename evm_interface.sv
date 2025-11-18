@@ -12,7 +12,7 @@ interface evm_interface #(parameter WIDTH = 7)(input logic clk, rst);
 
   logic [1:0] candidate_name;
   logic invalid_results;
-  logic [6:0] results;
+  logic [`WIDTH-1:0] results;
   logic voting_in_progress;
   logic voting_done;
 
