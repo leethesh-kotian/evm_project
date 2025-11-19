@@ -1,4 +1,3 @@
-//`include "define.sv"
 interface evm_interface #(parameter WIDTH = 7)(input logic clk, rst);
 
   logic vote_candidate_1;

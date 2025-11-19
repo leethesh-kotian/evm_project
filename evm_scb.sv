@@ -1,5 +1,5 @@
-//  `uvm_analysis_imp_decl(_ip)
-//  `uvm_analysis_imp_decl(_op)
+  `uvm_analysis_imp_decl(_ip)
+  `uvm_analysis_imp_decl(_op)
 
   typedef bit [`WIDTH-1:0] vote_t;
 

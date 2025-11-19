@@ -4,7 +4,7 @@ class evm_test extends uvm_test;
 
   evm_env env;
 
-  function new(string name = "evm_env", uvm_component parent);
+  function new(string name = "evm_test", uvm_component parent);
     super.new(name, parent);
   endfunction
 
@@ -40,7 +40,7 @@ endclass
 class evm_main_test extends evm_test;
 
   `uvm_component_utils(evm_main_test)
-  evm_env env;
+//  evm_env env;
   evm_main_sequence evm_main_seq;
 
   function new(string name = "evm_main_test", uvm_component parent = null);
@@ -49,8 +49,8 @@ class evm_main_test extends evm_test;
 
   virtual function void build_phase(uvm_phase phase);
     super.build_phase(phase);
-  evm_main_seq = evm_main_sequence ::type_id::create("evm_main_seq");
-  env = evm_env::type_id::create("env", this);
+  evm_main_seq = evm_main_sequence ::type_id::create("evm_main_seq",this);
+//  env = evm_env::type_id::create("env", this);
   `uvm_info("EVM_MAIN_TEST","Inside build_phase", UVM_LOW);
   endfunction
 

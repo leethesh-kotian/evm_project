@@ -1,8 +1,7 @@
 package evm_pkg;
     import uvm_pkg::*;
     `include "uvm_macros.svh"
-    
-    // Simple includes - NO forward declarations needed
+//    `include "evm_interface.sv"
     `include "evm_seq_item.sv"
     `include "evm_sequence.sv"
 //    `include "evm_main_sequence.sv"
@@ -10,7 +9,7 @@ package evm_pkg;
     `include "evm_driver.sv"
     `include "evm_input_monitor.sv"
     `include "evm_output_monitor.sv"
-//    `include "evm_scb.sv"
+    `include "evm_scb.sv"
     `include "evm_active_agent.sv"
     `include "evm_passive_agent.sv"
     `include "evm_env.sv"

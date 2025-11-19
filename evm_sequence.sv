@@ -127,7 +127,7 @@ class evm_sequence extends uvm_sequence #(evm_seq_item);
     endtask
 endclass
 
-class evm_main_sequence extends uvm_sequence #(evm_seq_item);
+class evm_main_sequence extends evm_sequence;
     `uvm_object_utils(evm_main_sequence)
  
    evm_seq_item req;

@@ -2,18 +2,19 @@ import uvm_pkg::*;
 // import evm_pkg::*;
 `include "uvm_macros.svh"
 `include "evm_define.svh"
-//`include "design.v"
+`include "evm_interface.sv"
 `include "evm_package.sv"
+`include "design.v"
 module evm_top;
 
   logic clk;
-  logic rst_n;
+  logic rst;
 
-  evm_interface evm_if ( .clk(clk) , .rst_n(rst_n));
+  evm_interface evm_if ( .clk(clk) , .rst(rst));
 
   evm dut (
     .clk	(evm_if.clk),
-    .rst	(evm_if.rst_n),
+    .rst	(evm_if.rst),
     .vote_candidate_1	(evm_if.vote_candidate_1),
     .vote_candidate_2	(evm_if.vote_candidate_2),
     .vote_candidate_3   (evm_if.vote_candidate_3),
@@ -35,16 +36,16 @@ module evm_top;
   end
 
   initial begin
-    rst_n = 0;
+    rst = 0;
     #10;
-    rst_n = 1;
+    rst = 1;
   end
   initial begin 
     uvm_config_db #(virtual evm_interface)::set(null, "*", "evm_if", evm_if);
   end
 
   initial begin
-    run_test("evm_test");
+    run_test("evm_main_test");
   end
 
 
