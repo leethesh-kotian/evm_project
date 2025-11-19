@@ -112,14 +112,13 @@ endclass
 class evm_sequence extends uvm_sequence #(evm_seq_item);
     `uvm_object_utils(evm_sequence)
 
+    evm_seq_item req;
+    
     function new(string name = "evm_sequence");
         super.new(name);
     endfunction
 
-    virtual task body();
-        // DECLARE VARIABLE AT TOP
-        evm_seq_item req;
-        
+    virtual task body(); 
         req = evm_seq_item::type_id::create("req");
         wait_for_grant();
         req.randomize();
@@ -130,7 +129,8 @@ endclass
 
 class evm_main_sequence extends uvm_sequence #(evm_seq_item);
     `uvm_object_utils(evm_main_sequence)
-
+ 
+   evm_seq_item req;
     function new(string name = "evm_main_sequence");
         super.new(name);
     endfunction
@@ -138,10 +138,10 @@ class evm_main_sequence extends uvm_sequence #(evm_seq_item);
     virtual task body();
         `uvm_info("MAIN_SEQ", "Starting EVM main sequence", UVM_MEDIUM)
         
-        // Simple test sequence
+        req = evm_seq_item::type_id::create("req");
+        
         `uvm_do_with(req, {switch_on_evm == 1; voting_session_done == 0;})
         
-        // Add a few votes
         repeat(5) begin
             `uvm_do_with(req, {
                 switch_on_evm == 1;
@@ -152,11 +152,10 @@ class evm_main_sequence extends uvm_sequence #(evm_seq_item);
             })
         end
         
-        // End voting
-        `uvm_do_with(req, {
-            switch_on_evm == 1;
-            voting_session_done == 1;
-            display_winner == 1;
+            `uvm_do_with(req, {
+                switch_on_evm == 1;
+                voting_session_done == 1;
+                display_winner == 1;
         })
     endtask
 endclass

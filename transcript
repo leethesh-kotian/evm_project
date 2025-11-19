@@ -1,0 +1,8 @@
+# vsim -c evm_top 
+# Start time: 09:37:14 on Nov 19,2025
+# ** Note: (vsim-3812) Design is being optimized...
+# ** Error: evm_top.sv(14): Module 'evm' is not defined.
+# Optimization failed
+# Error loading design
+# End time: 09:37:15 on Nov 19,2025, Elapsed time: 0:00:01
+# Errors: 1, Warnings: 0
