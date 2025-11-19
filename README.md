@@ -19,32 +19,7 @@ The Electronic Voting Machine (EVM) simulates real-world voting logic using a fi
 
 ![evm (1)](https://github.com/user-attachments/assets/24714f5f-bec0-48e9-80f2-0f342edbaebe)
 
-
-# ⚙️ **3. EVM Design Block Diagram**
-
-                    +-------------------------------+
-                    |         EVM FSM               |
-                    |-------------------------------|
-  switch_on_evm --->|  IDLE                         |
-                    |    |                          |
-                    |    v                          |
-  candidate_ready ->| WAITING_FOR_CANDIDATE         |
-                    |    |                          |
-                    |    v                          |
- vote_candidate_x ->| WAITING_FOR_CANDIDATE_TO_VOTE |
-                    |    |                          |
-                    |    v                          |
-                    |      CANDIDATE_VOTED          |
-  voting_done  <----|          |                    |
- voting_session_done|----------+                    |
-                    |           v                   |
-                    |     VOTING_PROCESS_DONE       |
-                    +-------------------------------+
-```
-
----
-
-# 📡 **4. EVM Inputs & Outputs**
+# 📡 **3. EVM Inputs & Outputs**
 
 ### **Inputs**
 
@@ -64,7 +39,7 @@ The Electronic Voting Machine (EVM) simulates real-world voting logic using a fi
 * voting_in_progress
 
 
-# 🔄 **5. FSM Description**
+# 🔄 **4. FSM Description**
 
 ### States:
 
@@ -75,24 +50,24 @@ The Electronic Voting Machine (EVM) simulates real-world voting logic using a fi
 5. **VOTING_PROCESS_DONE** – Winner/result display.
 
 
-# 🧪 **6. UVM Testbench Components**
+# 🧪 **5. UVM Testbench Components**
 
-### ✔ **Driver**
+###  **Driver**
 
 * Drives DUT inputs from sequence items.
 * Uses clocking block → ensures synchronous updates.
 
-### ✔ **Input Monitor**
+###  **Input Monitor**
 
 * Samples all DUT input pins every clock.
 * Sends transactions to scoreboard.
 
-### ✔ **Output Monitor**
+###  **Output Monitor**
 
 * Reads DUT outputs every clock.
 * Sends transactions to scoreboard.
 
-### ✔ **Scoreboard**
+###  **Scoreboard**
 
 * Compares expected vote counts with DUT output.
 * Checks:
@@ -102,7 +77,7 @@ The Electronic Voting Machine (EVM) simulates real-world voting logic using a fi
   * Voting_done timing
   * State-dependent outputs
 
-### ✔ **Sequences**
+###  **Sequences**
 
 * `evm_sequence` – basic randomized sequence.
 * `evm_main_sequence` – full voting scenario:
@@ -113,7 +88,7 @@ The Electronic Voting Machine (EVM) simulates real-world voting logic using a fi
   4. Display winner
 
 
-# 📝 **7. Verification Plan Summary**
+# 📝 **6. Verification Plan Summary**
 
 ### ⭐ **Functional Coverage Goals**
 
